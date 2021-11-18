@@ -57,7 +57,7 @@
     <h1 class="h3 mb-3 fw-normal">ログインする</h1>
     <?php
       if (!is_null($err)) {
-        echo '<div class="alert alert danger">'.$err.'</div>';
+        echo '<div class="alert alert-danger">'.$err.'</div>';
       }
     ?>
     <label class="visually-hidden">ユーザ名</label>
