@@ -73,11 +73,13 @@
       <form action="post.php" method="post">
         <div class="mb-3">
           <label class="mb-3">タイトル</label>
-          <input type="text" name="title" class="form-control">
+          <?php echo !empty($title_alert)? '<div class="alert alert-danger">'.$title_alert.'</div>':'' ?>
+          <input type="text" name="title" value="<?php echo $title; ?>" class="form-control">
         </div>
         <div class="mb-3">
           <label class="form-label">本文</label>
-          <textarea name="body" rows="10" class="form-control"></textarea>
+          <?php echo !empty($body_alert)? '<div class="alert alert-danger">'.$body_alert.'</div>':'' ?>
+          <textarea name="body" rows="10" class="form-control"><?php echo $body; ?></textarea>
         </div>
         <div class="mb-3">
           <button type="submit" class="btn btn-primary">投稿する</button>
