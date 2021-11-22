@@ -6,7 +6,7 @@ class connect {
   const USER = "user";
   const PASS = "pass";
 
-  private $dbh;
+  protected $dbh;
 
   public function __construct()
   {
