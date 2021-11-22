@@ -18,7 +18,7 @@
     $article->setTitle($title);
     $article->setBody($body);
     $article->save();
-    
+
     header('Location: backend.php');
   } else if (!empty($_POST)) {
     // POSTメソッドで送信されたが、titleかbodyが足りない場合
@@ -85,6 +85,10 @@
           <label class="form-label">本文</label>
           <?php echo !empty($body_alert)? '<div class="alert alert-danger">'.$body_alert.'</div>':'' ?>
           <textarea name="body" rows="10" class="form-control"><?php echo $body; ?></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">画像</label>
+          <input type="file" name="image" class="form-control">
         </div>
         <div class="mb-3">
           <button type="submit" class="btn btn-primary">投稿する</button>
