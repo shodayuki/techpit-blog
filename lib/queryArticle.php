@@ -30,7 +30,7 @@ class QueryArticle extends connect {
 
       switch($type) {
         case IMAGETYPE_JPEG:
-          $new_name .= 'jpg';
+          $new_name .= '.jpg';
 
           // サムネイルを保存
           $image = imagecreatefromjpeg($old_name);
@@ -39,7 +39,7 @@ class QueryArticle extends connect {
           break;
 
         case IMAGETYPE_GIF:
-          $new_name .= 'gif';
+          $new_name .= '.gif';
 
           // サムネイルを保存
           $image = imagecreatefromgif($old_name);
@@ -48,7 +48,7 @@ class QueryArticle extends connect {
           break;
 
         case IMAGETYPE_PNG:
-          $new_name .= 'png';
+          $new_name .= '.png';
 
           // サムネイルを保存
           $image = imagecreatefrompng($old_name);
