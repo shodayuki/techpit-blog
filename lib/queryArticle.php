@@ -30,7 +30,7 @@ class QueryArticle extends connect {
 
       switch($type) {
         case IMAGETYPE_JPEG:
-          $new_name .= '.jpg';
+          $new_name .= 'jpg';
 
           // サムネイルを保存
           $image = imagecreatefromjpeg($old_name);
@@ -39,7 +39,7 @@ class QueryArticle extends connect {
           break;
 
         case IMAGETYPE_GIF:
-          $new_name .= '.gif';
+          $new_name .= 'gif';
 
           // サムネイルを保存
           $image = imagecreatefromgif($old_name);
@@ -48,7 +48,7 @@ class QueryArticle extends connect {
           break;
 
         case IMAGETYPE_PNG:
-          $new_name .= '.png';
+          $new_name .= 'png';
 
           // サムネイルを保存
           $image = imagecreatefrompng($old_name);
@@ -86,9 +86,9 @@ class QueryArticle extends connect {
       $id = $this->article->getId();
 
       // 新しいファイルがアップロードされたとき
-      if ($file = $this->article->getFile()){
+      if ($file = $this->article->getFile()) {
         // ファイルが既にある場合、古いファイルを削除する
-        if ($this->article->getFilename()){
+        if ($this->article->getFilename()) {
           unlink(__DIR__.'/../album/thumbs-'.$this->article->getFilename());
           unlink(__DIR__.'/../album/'.$this->article->getFilename());
         }
