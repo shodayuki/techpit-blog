@@ -42,15 +42,15 @@ class QueryArticle extends connect {
 
         // ファイルの種類が画像だったとき、種類によって拡張子を変更
         switch ($type) {
-          case IMAGETYPE_JPEG;
+          case IMAGETYPE_JPEG:
             $new_name .= '.jpg';
             $is_upload = true;
             break;
-          case IMAGETYPE_GIF;
+          case IMAGETYPE_GIF:
             $new_name .= '.gif';
             $is_upload = true;
             break;
-          case IMAGETYPE_PNG;
+          case IMAGETYPE_PNG:
             $new_name .= '.png';
             $is_upload = true;
             break;
@@ -62,9 +62,10 @@ class QueryArticle extends connect {
         }
       }
 
-      $stmt = $this->dbh->prepare("INSERT INTO articles (title, body, created_at, updated_at) VALUES (:title, :body, NOW(), NOW())");
+      $stmt = $this->dbh->prepare("INSERT INTO articles (title, body, filename, created_at, updated_at) VALUES (:title, :body, :filename, NOW(), NOW())");
       $stmt->bindParam(':title', $title, PDO::PARAM_STR);
       $stmt->bindParam(':body', $body, PDO::PARAM_STR);
+      $stmt->bindParam(':filename', $filename, PDO::PARAM_STR);
       $stmt->execute();
     }
   }

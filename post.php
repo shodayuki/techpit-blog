@@ -80,7 +80,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1>記事の投稿</h1>
-      <form action="post.php" method="post">
+      <form action="post.php" method="post" enctype="multipart/form-data">
         <div class="mb-3">
           <label class="mb-3">タイトル</label>
           <?php echo !empty($title_alert)? '<div class="alert alert-danger">'.$title_alert.'</div>':'' ?>
