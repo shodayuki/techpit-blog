@@ -17,8 +17,13 @@
     $article = new Article();
     $article->setTitle($title);
     $article->setBody($body);
+
+    if (isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
+      $article->setFile($_FILES['image']);
+    }
+
     $article->save();
-    
+
     header('Location: backend.php');
   } else if (!empty($_POST)) {
     // POSTメソッドで送信されたが、titleかbodyが足りない場合
@@ -75,7 +80,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1>記事の投稿</h1>
-      <form action="post.php" method="post">
+      <form action="post.php" method="post" enctype="multipart/form-data">
         <div class="mb-3">
           <label class="mb-3">タイトル</label>
           <?php echo !empty($title_alert)? '<div class="alert alert-danger">'.$title_alert.'</div>':'' ?>
@@ -85,6 +90,10 @@
           <label class="form-label">本文</label>
           <?php echo !empty($body_alert)? '<div class="alert alert-danger">'.$body_alert.'</div>':'' ?>
           <textarea name="body" rows="10" class="form-control"><?php echo $body; ?></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">画像</label>
+          <input type="file" name="image" class="form-control">
         </div>
         <div class="mb-3">
           <button type="submit" class="btn btn-primary">投稿する</button>

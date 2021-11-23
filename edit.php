@@ -36,6 +36,12 @@
       // 記事データが存在していれば、タイトルと本文を変更して上書き保存
       $article->setTitle($title);
       $article->setBody($body);
+
+      // 画像がアップロードされていたとき
+      if (isset($_FILES['image']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
+        $article->setFile($_FILES['image']);
+      }
+
       $article->save();
     }
     header('Location: backend.php');
@@ -103,16 +109,26 @@
   <div class="row">
     <div class="col-md-12">
       <h1>記事の編集</h1>
-      <form action="edit.php" method="post">
+      <form action="edit.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?php echo $id ?>">
         <div class="mb-3">
-          <label class="mb-3">タイトル</label>
-          <?php echo !empty($title_alert)? '<div class="alert alert-danger">'.$title_alert.'</div>':'' ?>
+          <label class="form-label">タイトル</label>
+          <?php echo !empty($title_alert)? '<div class="alert alert-danger">'.$title_alert.'</div>': '' ?>
           <input type="text" name="title" value="<?php echo $title; ?>" class="form-control">
         </div>
         <div class="mb-3">
           <label class="form-label">本文</label>
-          <?php echo !empty($body_alert)? '<div class="alert alert-danger">'.$body_alert.'</div>':'' ?>
+          <?php echo !empty($body_alert) ? '<div class="alert alert-danger">'.$body_alert.'</div>': ''?>
           <textarea name="body" rows="10" class="form-control"><?php echo $body; ?></textarea>
+        </div>
+        <?php if ($article->getFilename()): ?>
+          <div class="mb-3">
+            <img src="./album/thumbs-<?php echo $article->getFilename() ?>">
+          </div>
+        <?php endif ?>
+        <div class="mb-3">
+          <label class="form-label">画像</label>
+          <input type="file" name="image" class="form-control">
         </div>
         <div class="mb-3">
           <button type="submit" class="btn btn-primary">投稿する</button>
