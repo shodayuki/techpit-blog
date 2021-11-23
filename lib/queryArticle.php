@@ -116,6 +116,7 @@ class QueryArticle extends connect {
       $article->setId($result['id']);
       $article->setTitle($result['title']);
       $article->setBody($result['body']);
+      $article->setFilename($result['filename']);
       $article->setCreatedAt($result['created_at']);
       $article->setUpdatedAt($result['updated_at']);
     }
@@ -132,6 +133,7 @@ class QueryArticle extends connect {
       $article->setId($result['id']);
       $article->setTitle($result['title']);
       $article->setBody($result['body']);
+      $article->setFilename($result['filename']);
       $article->setCreatedAt($result['created_at']);
       $article->setUpdatedAt($result['updated_at']);
       $articles[] = $article;
