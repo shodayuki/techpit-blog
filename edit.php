@@ -50,6 +50,8 @@
     // POSTメソッドで送信されたが、titleかbodyが足りないとき
     if (!empty($_POST['id'])) {
       $id = $_POST['id'];
+      $queryArticle = new QueryArticle();
+      $article = $queryArticle->find($id);
     } else {
       // 編集する記事IDがセットされていなければ、backend.phpへ戻る
       header('Location: backend.php');
