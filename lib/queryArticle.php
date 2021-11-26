@@ -159,7 +159,7 @@ class QueryArticle extends connect {
     $pager['total'] = $stmt->fetchColumn();
 
     // 表示するデータ
-    $stmt = $this->prepare("SELECT * FROM articles WHERE is_delete=0 ORDER BY created_at DESC LIMIT :start, :limit");
+    $stmt = $this->dbh->prepare("SELECT * FROM articles WHERE is_delete=0 ORDER BY created_at DESC LIMIT :start, :limit");
     $stmt->bindParam(':start', $start, PDO::PARAM_INT);
     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
     $stmt->execute();
