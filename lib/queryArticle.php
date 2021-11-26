@@ -154,7 +154,7 @@ class QueryArticle extends connect {
     $pager = array('total' => null, 'articles' => null);
 
     // 総記事数
-    $stmt = $this->dbh->prepare("SELECT COUNT FROM articles WHERE is_delete=0");
+    $stmt = $this->dbh->prepare("SELECT COUNT(*) FROM articles WHERE is_delete=0");
     $stmt->execute();
     $pager['total'] = $stmt->fetchColumn();
 
