@@ -13,6 +13,7 @@
 
   $queryArticle = new QueryArticle();
   $pager = $queryArticle->getPager($page, $limit);
+  $monthly = $queryArticle->getMonthlyArchiveMenu();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -87,9 +88,9 @@
       <div class="p-4">
         <h4>アーカイブ</h4>
         <ol class="list-unstyled mb-0">
-          <li><a href="#">2021/06</a></li>
-          <li><a href="#">2021/05</a></li>
-          <li><a href="#">2021/04</a></li>
+          <?php foreach($monthly as $m): ?>
+            <li><a href="index.php?month=<?php echo $m['month'] ?>"><?php echo $m['month'] ?>(<?php echo $m['count'] ?>)</a></li>
+          <?php endforeach ?>
         </ol>
       </div>
     </div>
