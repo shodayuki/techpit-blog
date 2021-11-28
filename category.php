@@ -1,3 +1,8 @@
+<?php
+  include('lib/secure.php');
+  include('lib/connect.php');
+  include('lib/queryCategory.php');
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -31,6 +36,23 @@
   <link rel="stylesheet" href="./css/blog.css">
 </head>
 <body>
-
+<?php include('lib/nav.php'); ?>
+<main class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>カテゴリー</h1>
+      <h2>新規追加</h2>
+      <form action="category.php" method="post" class="row">
+        <input type="hidden" name="action" value="add">
+        <div class="col-md-6">
+          <input type="text" name="name" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary">追加する</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
 </body>
 </html>
