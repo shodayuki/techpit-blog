@@ -2,6 +2,12 @@
   include('lib/secure.php');
   include('lib/connect.php');
   include('lib/queryCategory.php');
+
+  if (!empty($_POST['action']) && $_POST['action'] == !empty($_POST['name'])) {
+    $category = new Category();
+    $category->setName($_POST['name']);
+    $category->save();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="ja">

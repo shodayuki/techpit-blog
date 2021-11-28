@@ -13,12 +13,29 @@ class QueryCategory extends connect
   {
     $this->category = $category;
   }
+
+  public function save()
+  {
+    $name = $this->category->getName();
+
+    // 新規登録
+    $stmt = $this->dbh->prepare("INSERT INTO categories(name) VALUES (:name)");
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->execute();
+  }
 }
 
 class Category
 {
   private $id = null;
   private $name = null;
+
+  public function save()
+  {
+    $queryCategory = new QueryCategory();
+    $queryCategory->setCategory($this);
+    $queryCategory->save();
+  }
 
   public function getId()
   {
