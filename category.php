@@ -19,25 +19,26 @@
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <style>
     body {
-        padding-top: 5rem;
-      }
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+      padding-top: 5rem;
+    }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
 
-      .bg-red {
-        background-color: #ff6644 !important;
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
       }
+    }
+
+    .bg-red {
+      background-color: #ff6644 !important;
+    }
   </style>
   <link rel="stylesheet" href="./css/blog.css">
 </head>
