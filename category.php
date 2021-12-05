@@ -5,7 +5,7 @@
 
   $queryCategory = new QueryCategory();
 
-  if (!empty($_POST['action']) && $_POST['action'] == !empty($_POST['name'])) {
+  if (!empty($_POST['action']) && $_POST['action'] == 'add' && !empty($_POST['name'])) {
     $category = new Category();
     $category->setName($_POST['name']);
     $category->save();
