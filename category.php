@@ -3,11 +3,16 @@
   include('lib/connect.php');
   include('lib/queryCategory.php');
 
+  $queryCategory = new QueryCategory();
+
   if (!empty($_POST['action']) && $_POST['action'] == !empty($_POST['name'])) {
     $category = new Category();
     $category->setName($_POST['name']);
     $category->save();
   }
+
+  // 登録されているカテゴリーを全て取得
+  $categories = $queryCategory->findAll();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -58,6 +63,27 @@
           <button type="submit" class="btn btn-primary">追加する</button>
         </div>
       </form>
+      <hr>
+      <?php if ($categories): ?>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>カテゴリー名</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($categories as $c): ?>
+              <tr>
+                <td><?php echo $c->getId() ?></td>
+                <td><?php echo $c->getName() ?></td>
+              </tr>
+            <?php endforeach ?>
+          </tbody>
+        </table>
+      <?php else: ?>
+        <div class="alert alert-info">カテゴリーはまだ登録されていません。</div>
+      <?php endif ?>
     </div>
   </div>
 </main>
