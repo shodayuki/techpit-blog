@@ -144,7 +144,7 @@
           <select name="category" class="form-control">
             <option value="0">なし</option>
             <?php foreach ($categories as $c): ?>
-              <option value="<?php echo $c->getId() ?>" <?php echo $category_id == $c->getId()? 'selected="selected"': '' ?>><?php echo $c->getName() ?></option>
+            <option value="<?php echo $c->getId() ?>" <?php echo $category_id == $c->getId()? 'selected="selected"': '' ?>><?php echo $c->getName() ?></option>
             <?php endforeach ?>
           </select>
         </div>
