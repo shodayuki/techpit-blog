@@ -2,6 +2,15 @@
   include 'lib/connect.php';
   include 'lib/queryArticle.php';
   include 'lib/article.php';
+  include 'lib/queryCategory.php';
+
+  // Quryクラスのインスタンス生成、メニュー準備を追加
+  $queryArticle = new QueryArticle();
+  $queryCategory = new QueryCategory();
+
+  // メニューの準備
+  $monthly = $queryArticle->getMonthlyArchiveMenu();
+  $category = $queryCategory->getCategoryMenu();
 
   $limit = 5;
   $page = 1;
@@ -19,9 +28,7 @@
     $title = $month.'の投稿一覧';
   }
 
-  $queryArticle = new QueryArticle();
   $pager = $queryArticle->getPager($page, $limit, $month);
-  $monthly = $queryArticle->getMonthlyArchiveMenu();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -101,6 +108,14 @@
         <ol class="list-unstyled mb-0">
           <?php foreach($monthly as $m): ?>
             <li><a href="index.php?month=<?php echo $m['month'] ?>"><?php echo $m['month'] ?>(<?php echo $m['count'] ?>)</a></li>
+          <?php endforeach ?>
+        </ol>
+      </div>
+      <div class="p-4">
+        <h4>カテゴリ別アーカイブ</h4>
+        <ol class="list-unstyled mb-0">
+          <?php foreach ($category as $c): ?>
+            <li><a href="index.php?category=<?php echo $c['id']? $c['id']: 0 ?>"><?php echo $c['name']? $c['name']: 'カテゴリーなし' ?>(<?php echo $c ['count'] ?>)</a></li>
           <?php endforeach ?>
         </ol>
       </div>
