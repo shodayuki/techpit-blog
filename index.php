@@ -16,6 +16,18 @@
   $page = 1;
   $month = null;
   $title = "";
+  $category_id = null;
+
+  // カテゴリー別
+  if (isset($_GET['category'])) {
+    if (isset($category[$_GET['category']])) {
+      $title = 'カテゴリー:'.$category[$_GET['category']]['name'];
+      $category_id = intval($_GET['category']);
+    } else {
+      $title = 'カテゴリーなし';
+      $category_id = 0;
+    }
+  }
 
   // ページ数の決定
   if (!empty($_GET['page']) && intval($_GET['page']) > 0) {
@@ -28,7 +40,7 @@
     $title = $month.'の投稿一覧';
   }
 
-  $pager = $queryArticle->getPager($page, $limit, $month);
+  $pager = $queryArticle->getPager($page, $limit, $month, $category_id);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -92,7 +104,7 @@
         <nav aria-label="Page navigation example">
           <ul class="pagination">
             <?php for ($i = 1; $i <= ceil($pager['total'] / $limit); $i++): ?>
-              <li class="page-item"><a class="page-link" href="index.php?page=<?php echo $i ?><?php echo $month? '&month='.$month : '' ?>"><?php echo $i ?></a></li>
+              <li class="page-item"><a class="page-link" href="index.php?page=<?php echo $i ?><?php echo $month? '&month='.$month : '' ?><?php echo !is_null($category_id)? '&category='.$category_id : '' ?>"><?php echo $i ?></a></li>
             <?php endfor ?>
           </ul>
         </nav>
