@@ -3,6 +3,7 @@
   include 'lib/connect.php';
   include 'lib/queryArticle.php';
   include 'lib/article.php';
+  include 'lib/queryCategory.php';
 
   $limit = 10;
   $page = 1;
@@ -14,6 +15,8 @@
 
   $queryArticle = new QueryArticle();
   $pager = $queryArticle->getPager($page, $limit);
+  $queryCategory = new QueryCategory();
+  $pager = $queryCategory->findAll();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -75,6 +78,7 @@
                 <td><?php echo $article->getTitle() ?></td>
                 <td><?php echo $article->getBody() ?></td>
                 <td><?php echo $article->getFilename()? '<img src="./album/thumbs-'.$article->getFilename().'">': 'なし' ?></td>
+                <td><?php echo isset($categories[$article->getCategoryId()]? $categories[$article->getCategoryId()]->getName(): 'なし' ?></td>
                 <td><?php echo $article->getCreatedAt() ?></td>
                 <td><?php echo $article->getUpdatedAt() ?></td>
                 <td><a href="edit.php?id=<?php echo $article->getId() ?>" class="btn btn-success">編集</a></td>
