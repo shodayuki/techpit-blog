@@ -2,11 +2,32 @@
   include 'lib/connect.php';
   include 'lib/queryArticle.php';
   include 'lib/article.php';
+  include 'lib/queryCategory.php';
+
+  // Quryクラスのインスタンス生成、メニュー準備を追加
+  $queryArticle = new QueryArticle();
+  $queryCategory = new QueryCategory();
+
+  // メニューの準備
+  $monthly = $queryArticle->getMonthlyArchiveMenu();
+  $category = $queryCategory->getCategoryMenu();
 
   $limit = 5;
   $page = 1;
   $month = null;
   $title = "";
+  $category_id = null;
+
+  // カテゴリー別
+  if (isset($_GET['category'])) {
+    if (isset($category[$_GET['category']])) {
+      $title = 'カテゴリー:'.$category[$_GET['category']]['name'];
+      $category_id = intval($_GET['category']);
+    } else {
+      $title = 'カテゴリーなし';
+      $category_id = 0;
+    }
+  }
 
   // ページ数の決定
   if (!empty($_GET['page']) && intval($_GET['page']) > 0) {
@@ -19,9 +40,7 @@
     $title = $month.'の投稿一覧';
   }
 
-  $queryArticle = new QueryArticle();
-  $pager = $queryArticle->getPager($page, $limit, $month);
-  $monthly = $queryArticle->getMonthlyArchiveMenu();
+  $pager = $queryArticle->getPager($page, $limit, $month, $category_id);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -85,7 +104,7 @@
         <nav aria-label="Page navigation example">
           <ul class="pagination">
             <?php for ($i = 1; $i <= ceil($pager['total'] / $limit); $i++): ?>
-              <li class="page-item"><a class="page-link" href="index.php?page=<?php echo $i ?><?php echo $month? '&month='.$month : '' ?>"><?php echo $i ?></a></li>
+              <li class="page-item"><a class="page-link" href="index.php?page=<?php echo $i ?><?php echo $month? '&month='.$month : '' ?><?php echo !is_null($category_id)? '&category='.$category_id : '' ?>"><?php echo $i ?></a></li>
             <?php endfor ?>
           </ul>
         </nav>
@@ -101,6 +120,14 @@
         <ol class="list-unstyled mb-0">
           <?php foreach($monthly as $m): ?>
             <li><a href="index.php?month=<?php echo $m['month'] ?>"><?php echo $m['month'] ?>(<?php echo $m['count'] ?>)</a></li>
+          <?php endforeach ?>
+        </ol>
+      </div>
+      <div class="p-4">
+        <h4>カテゴリ別アーカイブ</h4>
+        <ol class="list-unstyled mb-0">
+          <?php foreach ($category as $c): ?>
+            <li><a href="index.php?category=<?php echo $c['id']? $c['id']: 0 ?>"><?php echo $c['name']? $c['name']: 'カテゴリーなし' ?>(<?php echo $c ['count'] ?>)</a></li>
           <?php endforeach ?>
         </ol>
       </div>
