@@ -23,7 +23,7 @@
     }
   }
 
-  // 登録されているカテゴリーを全て取得
+  // 登録されているカテゴリーをすべて取得
   $categories = $queryCategory->findAll();
 ?>
 <!DOCTYPE html>
@@ -77,6 +77,7 @@
             <button type="submit" class="btn btn-primary">編集する</button>
           </div>
         </form>
+        <hr>
       <?php endif ?>
       <h2>新規追加</h2>
       <form action="category.php" method="post" class="row">
